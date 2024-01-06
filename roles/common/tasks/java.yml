@@ -1,0 +1,21 @@
+- name: Install Maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: Import schema_setup yml file
+  ansible.builtin.import_tasks:
+    file: app_prereq.yaml
+
+- name: Download Maven Dependencies
+  ansible.builtin.shell: mvn clean package; mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: /app
+
+- name: Import schema_setup yml file
+  ansible.builtin.import_tasks:
+    file: schema_setup.yaml
+
+- name: Import schema_setup yml file
+  ansible.builtin.import_tasks:
+    file: systemd_setup.yaml

@@ -1,0 +1,4 @@
+- name: Import python
+  ansible.builtin.import_role:
+    name: common
+    asks_from: python

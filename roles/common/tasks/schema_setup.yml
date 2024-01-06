@@ -1,0 +1,26 @@
+- name:
+  when: schema_setup == "mongodb"
+  block:
+    - name: Copy MongoDB repo
+      ansible.builtin.copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
+
+    - name: Install MongoDB Client
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed
+
+    - name: Load Schema
+      ansible.builtin.shell: mongo --host mongodb-dev.msdevops72.online </app/schema/{{component}}.js
+
+- name:
+  when: schema_setup == "mysql"
+  block:
+    - name: Install MySQL Client
+      ansible.builtin.yum:
+        name: install mysql
+        state: installed
+
+    - name: Load Schema
+      ansible.builtin.shell: mysql -h mysql-dev.msdevops72.online -u root -p {{mysql_root_password}} < /app/schema/{{component}}.sql
