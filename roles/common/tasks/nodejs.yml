@@ -5,8 +5,6 @@
   ansible.builtin.yum:
     name: nodejs
     state: installed
-    args:
-      chdir: /app
 
 - name: Import app_prereq yml file
   ansible.builtin.import_tasks:
