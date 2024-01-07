@@ -5,7 +5,7 @@
 
 - name: Import schema_setup yml file
   ansible.builtin.import_tasks:
-    file: app_prereq.yaml
+    file: app_prereq.yml
 
 - name: Download Maven Dependencies
   ansible.builtin.shell: mvn clean package; mv target/{{component}}-1.0.jar {{component}}.jar
