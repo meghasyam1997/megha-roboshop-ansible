@@ -19,7 +19,7 @@
   block:
     - name: Install MySQL Client
       ansible.builtin.yum:
-        name: install mysql
+        name: mysql
         state: installed
 
     - name: Load Schema
