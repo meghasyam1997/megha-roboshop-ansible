@@ -24,7 +24,8 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
-- name: Import Common systemd_setup
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: systemd_setup
+- name: Restart Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enable: true
